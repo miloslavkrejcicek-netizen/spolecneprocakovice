@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Společně pro Čakovice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#1A3FAA;--blue-light:#EEF2FB;--blue-mid:#2E5FD9;--accent:#C8A84B;--text:#111827;--text-mid:#374151;--text-dim:#6B7280;--border:#E5E7EB;--white:#fff;--bg:#F9FAFB}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--text);background:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 6%;display:flex;align-items:center;justify-content:space-between;height:78px;transition:box-shadow .3s}
+nav.scrolled{box-shadow:0 2px 16px rgba(0,0,0,.07)}
+.nav-logo{display:flex;align-items:center;text-decoration:none}.nav-logo img{height:56px;width:auto}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links a{color:var(--text-mid);text-decoration:none;font-size:13.5px;font-weight:500;transition:color .2s}.nav-links a:hover{color:var(--blue)}
+.nav-cta{background:var(--blue);color:white!important;padding:8px 18px;border-radius:6px;font-weight:600!important;font-size:13px!important}.nav-cta:hover{background:var(--blue-mid)!important}
+#hero{padding:150px 6% 80px;background:var(--white);display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:1200px;margin:0 auto}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--blue-light);color:var(--blue);font-size:11.5px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:20px;animation:fadeUp .5s ease both}
+.hero-eyebrow-dot{width:6px;height:6px;background:var(--blue);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
+h1{font-family:'Lora',serif;font-size:clamp(36px,4vw,56px);font-weight:700;line-height:1.12;color:var(--text);margin-bottom:20px;animation:fadeUp .5s .08s ease both}
+h1 em{font-style:italic;color:var(--blue)}
+.hero-perex{font-size:17px;font-weight:300;line-height:1.75;color:var(--text-dim);margin-bottom:36px;max-width:480px;animation:fadeUp .5s .16s ease both}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;animation:fadeUp .5s .24s ease both}
+.btn-primary{background:var(--blue);color:white;padding:12px 28px;border-radius:7px;font-weight:600;font-size:14px;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.btn-primary:hover{background:var(--blue-mid);transform:translateY(-1px);box-shadow:0 4px 16px rgba(26,63,170,.25)}
+.btn-secondary{background:white;color:var(--text);padding:12px 28px;border-radius:7px;border:1.5px solid var(--border);font-weight:500;font-size:14px;text-decoration:none;transition:all .2s}
+.btn-secondary:hover{border-color:var(--blue);color:var(--blue)}
+.hero-visual{animation:fadeUp .5s .1s ease both}
+.hero-card-stack{position:relative;height:360px}
+.hcard{position:absolute;background:white;border:1px solid var(--border);border-radius:16px;padding:24px 28px;box-shadow:0 4px 24px rgba(0,0,0,.07)}
+.hcard-main{top:0;left:0;right:0;background:var(--blue);color:white;border-color:transparent}
+.hcard-main h3{font-family:'Lora',serif;font-size:20px;font-weight:700;margin-bottom:6px}
+.hcard-main p{font-size:13px;opacity:.75;line-height:1.6}
+.hcard-stat{bottom:60px;right:-20px;width:160px;text-align:center}
+.hcard-stat-num{font-family:'Lora',serif;font-size:38px;font-weight:700;color:var(--blue);line-height:1;display:block}
+.hcard-stat-label{font-size:11px;color:var(--text-dim);font-weight:500;display:block;margin-top:4px}
+.hcard-badge{bottom:0;left:20px;display:flex;align-items:center;gap:10px;padding:14px 20px}
+.hcard-badge-icon{font-size:22px}.hcard-badge-text{font-size:13px;font-weight:600;color:var(--text)}
+.hcard-badge-sub{font-size:11px;color:var(--text-dim);display:block}
+.stats-strip{background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:36px 6%}
+.stats-strip-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.stat-cell{text-align:center;padding:8px 24px;border-right:1px solid var(--border)}.stat-cell:last-child{border-right:none}
+.stat-cell-num{font-family:'Lora',serif;font-size:40px;font-weight:700;color:var(--blue);line-height:1;display:block}
+.stat-cell-label{font-size:12px;color:var(--text-dim);font-weight:500;margin-top:6px;display:block}
+.section{padding:88px 6%}.section-inner{max-width:1100px;margin:0 auto}
+.section-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:12px}
+h2{font-family:'Lora',serif;font-size:clamp(26px,3vw,40px);font-weight:700;line-height:1.2;color:var(--text);margin-bottom:14px}
+.section-sub{font-size:16px;color:var(--text-dim);line-height:1.7;max-width:520px;margin-bottom:52px;font-weight:300}
+.detail-hint{font-size:12px;color:var(--blue);font-weight:600;margin-top:10px;display:inline-block}
+#program{background:var(--white)}
+.program-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.prog-card{background:white;border:1px solid var(--border);border-radius:12px;padding:32px 28px;transition:all .22s}
+.prog-card:hover{border-color:rgba(26,63,170,.25);box-shadow:0 8px 32px rgba(26,63,170,.08);transform:translateY(-3px)}
+.prog-icon{width:48px;height:48px;background:var(--blue-light);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:18px}
+.prog-card h3{font-family:'Lora',serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:10px}
+.prog-card p{font-size:14px;color:var(--text-dim);line-height:1.7}
+#kandidati{background:var(--bg)}
+.kandidati-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.kand-card{background:white;border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:all .22s}
+.kand-card:hover{box-shadow:0 8px 28px rgba(0,0,0,.08);transform:translateY(-3px)}
+.kand-photo{width:100%;aspect-ratio:1;background:var(--blue-light);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.kand-body{padding:18px 20px}
+.kand-rank{font-size:10.5px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+.kand-body h3{font-family:'Lora',serif;font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px}
+.kand-body p{font-size:12.5px;color:var(--text-dim);line-height:1.55}
+.kand-party{display:inline-block;margin-top:8px;padding:3px 9px;border-radius:100px;font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase}
+.party-ods{background:#EFF6FF;color:#1D4ED8;border:1px solid #BFDBFE}
+.party-top09{background:#FEFCE8;color:#854D0E;border:1px solid #FDE68A}
+.party-nez{background:var(--bg);color:var(--text-dim);border:1px solid var(--border)}
+.show-more-btn{display:block;margin:28px auto 0;background:white;border:1.5px solid var(--border);color:var(--text-mid);padding:11px 28px;border-radius:7px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all .2s}
+.show-more-btn:hover{border-color:var(--blue);color:var(--blue)}
+#all-kandidati{display:none;margin-top:32px}
+.kandidati-grid-all{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.kand-card-sm{background:white;border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:all .22s;display:flex;flex-direction:column}
+.kand-card-sm:hover{box-shadow:0 6px 20px rgba(0,0,0,.07);transform:translateY(-2px)}
+.kand-photo-sm{width:100%;aspect-ratio:1;background:var(--blue-light);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.kand-body-sm{padding:13px 15px}
+#vysledky{background:white}
+.vysledky-grid{display:grid;grid-template-columns:3fr 2fr;gap:48px;align-items:start}
+.vysledky-list{display:flex;flex-direction:column;gap:14px}
+.vys-item{display:flex;align-items:flex-start;gap:16px;padding:20px 22px;background:white;border:1px solid var(--border);border-radius:10px;border-left:3px solid var(--blue);transition:all .2s}
+.vys-item:hover{border-left-color:var(--accent);box-shadow:0 4px 16px rgba(0,0,0,.06);transform:translateX(3px)}
+.vys-check{width:28px;height:28px;background:var(--blue-light);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--blue);font-size:12px;font-weight:700;flex-shrink:0}
+.vys-text h4{font-size:14.5px;font-weight:600;color:var(--text);margin-bottom:4px}
+.vys-text p{font-size:13px;color:var(--text-dim);line-height:1.55}
+.vysledky-panel{background:var(--blue);border-radius:16px;padding:36px;color:white;position:sticky;top:80px}
+.vysledky-panel h3{font-family:'Lora',serif;font-size:22px;margin-bottom:6px}
+.vysledky-panel>p{font-size:13px;opacity:.65;margin-bottom:28px;line-height:1.6}
+.pb-item{margin-bottom:22px}.pb-top{display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px}
+.pb-top span:first-child{opacity:.8}.pb-top span:last-child{font-weight:600;color:#FDE68A}
+.pb-track{height:5px;background:rgba(255,255,255,.15);border-radius:100px}
+.pb-fill{height:100%;background:linear-gradient(90deg,rgba(255,255,255,.5),#FDE68A);border-radius:100px}
+#akce{background:var(--bg)}
+.akce-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.akce-card{background:white;border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:all .22s}
+.akce-card:hover{box-shadow:0 8px 28px rgba(0,0,0,.08);transform:translateY(-3px)}.akce-card.past{opacity:.55}
+.akce-top{background:var(--blue-light);padding:20px 24px;display:flex;align-items:center;gap:16px}
+.akce-date{background:white;border-radius:8px;padding:8px 12px;text-align:center;min-width:52px;border:1px solid var(--border)}
+.akce-day{font-family:'Lora',serif;font-size:26px;font-weight:700;color:var(--blue);line-height:1;display:block}
+.akce-month{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text-dim);display:block;margin-top:2px}
+.akce-typ-badge{font-size:11px;font-weight:600;color:var(--blue);background:white;border:1px solid rgba(26,63,170,.15);border-radius:100px;padding:3px 10px;display:inline-block;margin-bottom:4px}
+.akce-time{font-size:12px;color:var(--text-dim)}.akce-body{padding:20px 24px}
+.akce-body h3{font-family:'Lora',serif;font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px}
+.akce-body p{font-size:13px;color:var(--text-dim);line-height:1.6;margin-bottom:10px}
+.akce-misto{font-size:12px;color:var(--blue);font-weight:500}.akce-empty{text-align:center;padding:56px 20px;color:var(--text-dim)}
+#kontakt{background:white}
+.kontakt-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.kontakt-links{display:flex;flex-direction:column;gap:14px;margin-top:28px}
+.kontakt-link{display:flex;align-items:center;gap:14px;color:var(--text-mid);text-decoration:none;font-size:14.5px;padding:14px 18px;border:1px solid var(--border);border-radius:10px;transition:all .2s}
+.kontakt-link:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-light)}
+.kontakt-link-icon{width:36px;height:36px;background:var(--blue-light);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;color:var(--blue)}
+.kontakt-form{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:36px}
+.kontakt-form h3{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--text);margin-bottom:24px}
+.kfg{margin-bottom:14px}.kfg label{display:block;font-size:12px;font-weight:600;color:var(--text-dim);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+.kfg input,.kfg textarea{width:100%;background:white;border:1.5px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'Inter',sans-serif;font-size:14px;outline:none;transition:border-color .2s;resize:none}
+.kfg input:focus,.kfg textarea:focus{border-color:var(--blue)}.kfg textarea{height:100px}
+.btn-form{width:100%;background:var(--blue);color:white;border:none;padding:13px;border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;margin-top:6px}
+.btn-form:hover{background:var(--blue-mid);transform:translateY(-1px)}
+footer{background:var(--text);color:rgba(255,255,255,.55);padding:28px 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:13px}
+footer strong{color:rgba(255,255,255,.85)}
+.footer-parties{display:flex;gap:10px}
+.footer-party{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 12px;border-radius:4px;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.6)}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-box{background:white;border-radius:20px;max-width:600px;width:100%;max-height:85vh;overflow-y:auto;position:relative;transform:translateY(20px);transition:transform .25s;box-shadow:0 24px 80px rgba(0,0,0,.2)}
+.modal-overlay.open .modal-box{transform:translateY(0)}
+.modal-close{position:sticky;top:0;display:flex;justify-content:flex-end;padding:16px 20px 0;background:white;z-index:1}
+.modal-close button{background:var(--bg);border:1px solid var(--border);border-radius:50%;width:36px;height:36px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif}
+.modal-close button:hover{background:var(--border)}
+.modal-content{padding:8px 36px 36px}
+.modal-kand{}
+.modal-kand-top{display:flex;gap:24px;align-items:flex-start;margin-bottom:24px}
+.modal-kand-photo{width:100px;height:100px;border-radius:12px;background:var(--blue-light);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.modal-body-text{font-size:15px;color:var(--text-mid);line-height:1.8}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}.reveal.visible{opacity:1;transform:none}
+@media(max-width:960px){#hero{grid-template-columns:1fr;padding-top:100px}.hero-visual{display:none}.program-grid{grid-template-columns:1fr 1fr}.kandidati-grid{grid-template-columns:repeat(2,1fr)}.vysledky-grid{grid-template-columns:1fr}.kontakt-grid{grid-template-columns:1fr}.stats-strip-inner{grid-template-columns:repeat(2,1fr)}.akce-grid{grid-template-columns:1fr 1fr}.kandidati-grid-all{grid-template-columns:repeat(3,1fr)}.nav-links{display:none}}
+@media(max-width:580px){.program-grid,.kandidati-grid,.akce-grid{grid-template-columns:1fr}.stats-strip-inner{grid-template-columns:1fr}.kandidati-grid-all{grid-template-columns:repeat(2,1fr)}.modal-content{padding:8px 20px 24px}.modal-kand-top{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalBg(event)">
+  <div class="modal-box">
+    <div class="modal-close"><button onclick="closeModal()">✕</button></div>
+    <div class="modal-content" id="modal-content"></div>
+  </div>
+</div>
+
+<nav id="main-nav">
+  <a href="#" class="nav-logo"><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjUyLjgxNDY2NyIgdmlld0JveD0iMCAwIDE0Mi42MDY5NiA1Mi44MTQ2NjYiIHdpZHRoPSIxNDIuNjA2OTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxjbGlwUGF0aCBpZD0iYSI+PHBhdGggZD0ibTQ3NC4xMTcgMTExLjA4NXYtMzkuNjA5aC4wMTZ2LS4wMDJoMzkuNjA5di4wMTRoLjAwMXY5LjQ2M2gtNS40ODl2LTMuOTg3aC0yOC42NDd2MjguNjMyaDI4LjYzMXYtMy45NzJoNS40ODh2OS40NjF6Ii8+PC9jbGlwUGF0aD48bGluZWFyR3JhZGllbnQgaWQ9ImIiIGdyYWRpZW50VHJhbnNmb3JtPSJtYXRyaXgoLTI5LjMwMTYwMSA0Mi4xNjU3MjIgNDIuMTY1NzIyIDI5LjMwMTYwMSA1MTAuNjA2NTEgNjcuMjcyMzA4KSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHNwcmVhZE1ldGhvZD0icGFkIiB4MT0iMCIgeDI9IjEiIHkxPSIwIiB5Mj0iMCI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZmYyYTY0Ii8+PHN0b3Agb2Zmc2V0PSIuMDYwMDYzNiIgc3RvcC1jb2xvcj0iI2ZmMmE2NCIvPjxzdG9wIG9mZnNldD0iLjU1NjYwNyIgc3RvcC1jb2xvcj0iIzU3NDlmOCIvPjxzdG9wIG9mZnNldD0iLjU5ODQyMSIgc3RvcC1jb2xvcj0iIzUxNjdmOSIvPjxzdG9wIG9mZnNldD0iLjk3NDY1IiBzdG9wLWNvbG9yPSIjM2JkYWZkIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjM2JkYWZkIi8+PC9saW5lYXJHcmFkaWVudD48ZyB0cmFuc2Zvcm09Im1hdHJpeCgxLjMzMzMzMzMgMCAwIC0xLjMzMzMzMzMgLTYzMi4xNTU5OCAxNDguMTEzMzMpIj48ZyBmaWxsPSIjMjcwNTVlIiB0cmFuc2Zvcm09Im1hdHJpeCgxIDAgMCAtLjk4NzUyNzE1IDQ4My45MjIxIDg0LjcyMSkiPjxwYXRoIGQ9Im01Ljk1MjQxNDgtMTAuOTcyOTgycS0uNjA4NTUzNiAwLTEuMDA3OTE2OS4zMjMyOTQtLjM4MDM0Ni4zMjMyOTQtLjM4MDM0Ni45MzE4NDc5IDAgLjYwODU1MzYuMzYxMzI4Ny45ODg4OTk2LjM2MTMyODcuMzYxMzI4Ny45MzE4NDc3LjU3MDUxODkuNTg5NTM2My4xOTAxNzMgMS4yOTMxNzY0LjM4MDM0Ni43MjI2NTc0LjE3MTE1NTcgMS40MjYyOTc0LjQzNzM5NzkuNzAzNjQwMS4yNDcyMjQ5IDEuMjc0MTU5MS42Mjc1NzA5LjU4OTUzNjguMzgwMzQ2Ljk1MDg2NDggMS4wODM5ODYxLjM2MTMyOS42ODQ2MjI4LjM2MTMyOSAxLjY1NDUwNTEgMCAxLjY5MjUzOTYtMS4zODgyNjMgMi45MDk2NDY4LTEuMzY5MjQ1NiAxLjE5ODA4OTktMy42MzIzMDQyIDEuMTk4MDg5OS0yLjI0NDA0MTQgMC0zLjYzMjMwNDItMS4wODM5ODYwOC0xLjM2OTI0NTYtMS4wODM5ODYxMi0xLjM2OTI0NTYtMy4wODA4MDI1MmgzLjQ2MTE0ODVxLjEzMzEyMTEgMS41OTc0NTMxIDEuNjM1NDg3OCAxLjU5NzQ1MzEuNzAzNjQwMSAwIDEuMTAzMDAzNC0uMzYxMzI4Ni4zOTkzNjMzLS4zODAzNDYuMzk5MzYzMy0uOTUwODY1IDAtLjU3MDUxOS0uMzYxMzI4Ny0uOTMxODQ3Ny0uMzYxMzI4Ny0uMzYxMzI4Ny0uOTUwODY1LS41NzA1MTktLjU3MDUxOS0uMjA5MTkwMy0xLjI5MzE3NjQtLjM4MDM0Ni0uNzAzNjQwMS0uMTkwMTczLTEuNDA3MjgwMi0uNDU2NDE1Mi0uNzAzNjQwMS0uMjY2MjQyMi0xLjI5MzE3NjMtLjYyNzU3MDktLjU3MDUxOS0uMzgwMzQ2LS45MzE4NDc3LTEuMDY0OTY4OC0uMzYxMzI4Ny0uNzAzNjQtLjM2MTMyODctMS42NTQ1MDUgMC0xLjg2MzY5NTQgMS4zODgyNjI5LTIuOTg1NzE2NCAxLjM4ODI2MjgtMS4xMjIwMiAzLjUzNzIxNzctMS4xMjIwMiAyLjE2Nzk3MjEgMCAzLjQ5OTE4MzEuOTg4ODk5IDEuMzMxMjExMy45Njk4ODMgMS4zODgyNjMzIDMuMDgwODAyOGgtMy41MzcyMTgxcS0uMDc2MDY5LS43MjI2NTc4LS40NzU0MzI1LTEuMTAzMDAzOC0uMzgwMzQ2LS4zOTkzNjMtLjk4ODg5OTYtLjM5OTM2M3oiLz48cGF0aCBkPSJtMjMuMzkzMTgtOS4yNjE0MjQ5cTAgMS4zNTAyMjgyLS45Njk4ODIgMi42MDUzNy0uNTEzNDY3LjY0NjU4ODItMS41NDA0MDEgMS4wNjQ5Njg4LTEuMDA3OTE3LjM5OTM2MzMtMi4zOTYxOC4zOTkzNjMzaC0yLjAxNTgzNHY1LjE5MTcyMjhoLTMuMjUxOTU4di0xMy4zNTAxNDRoNS4yNjc3OTJxMi4zMjAxMSAwIDMuNjEzMjg3IDEuMTk4MDkgMS4yOTMxNzYgMS4xOTgwODkgMS4yOTMxNzYgMi44OTA2Mjkxem0tNi45MjIyOTcgMS41OTc0NTMxaDIuMDE1ODM0cS43NDE2NzQgMCAxLjE2MDA1NS0uNDM3Mzk3OS40MzczOTgtLjQzNzM5NzguNDM3Mzk4LTEuMTQxMDM3OSAwLS43MjI2NTc0LS40MzczOTgtMS4xNzkwNzI0LS40MzczOTgtLjQ1NjQxNS0xLjE2MDA1NS0uNDU2NDE1aC0yLjAxNTgzNHoiLz48cGF0aCBkPSJtMzMuNzE5NTc0LTMuOTE3NTYzN3EuOTY5ODgzLTEuMDQ1OTUxNS45Njk4ODMtMi43OTU1NDMxIDAtMS43NDk1OTE1LS45Njk4ODMtMi43OTU1NDMtLjk1MDg2NS0xLjA0NTk1MTItMi41NjczMzUtMS4wNDU5NTEyLTEuNTk3NDUzIDAtMi41NjczMzYgMS4wNDU5NTEyLS45NTA4NjUgMS4wNDU5NTE1LS45NTA4NjUgMi43OTU1NDMgMCAxLjc0OTU5MTYuOTUwODY1IDIuNzk1NTQzMS45Njk4ODMgMS4wNDU5NTE1IDIuNTY3MzM2IDEuMDQ1OTUxNSAxLjYxNjQ3IDAgMi41NjczMzUtMS4wNDU5NTE1em0tNy40MTY3NDcgMi4xMTA5MjAycS0xLjk3Nzc5OS0xLjkzOTc2NDUtMS45Nzc3OTktNC45MDY0NjMzIDAtMi45NjY2OTg3IDEuOTc3Nzk5LTQuODg3NDQ2MiAxLjk5NjgxNy0xLjkzOTc2NCA0Ljg2ODQyOS0xLjkzOTc2NCAyLjg5MDYzIDAgNC44NDk0MTIgMS45Mzk3NjQgMS45Nzc3OTkgMS45MjA3NDc1IDEuOTc3Nzk5IDQuODg3NDQ2MiAwIDIuOTY2Njk4OC0xLjk3Nzc5OSA0LjkwNjQ2MzMtMS45Nzc4IDEuOTM5NzY0Ni00Ljg0OTQxMiAxLjkzOTc2NDYtMi44NzE2MTIgMC00Ljg2ODQyOS0xLjkzOTc2NDZ6Ii8+PHBhdGggZD0ibTQwLjAzMTQxNS0xMy4zNTAxNDRoMy4yNTE5NTl2MTAuODc3ODk1aDQuMDUwNjg0djIuNDcyMjQ5aC03LjMwMjY0M3oiLz48cGF0aCBkPSJtNTcuNDcwMjgyLTEzLjM4ODE3OXYyLjQ3MjI0OWgtNC44MzAzOTV2Mi44NzE2MTIyaDQuMjU5ODc2djIuNDcyMjQ5aC00LjI1OTg3NnYzLjA5OTgxOThoNC44MzAzOTV2Mi40NzIyNDloLTguMDgyMzUzdi0xMy4zODgxNzl6Ii8+PHBhdGggZD0ibTYwLjgzNjM0My0xLjgwNjY0MzVxLTEuOTc3Nzk5LTEuOTM5NzY0NS0xLjk3Nzc5OS00LjkwNjQ2MzMgMC0yLjk2NjY5ODcgMS45Nzc3OTktNC44ODc0NDYyIDEuOTk2ODE3LTEuOTM5NzY0IDQuODY4NDI5LTEuOTM5NzY0IDIuMjI1MDI0IDAgMy45NTU1OTggMS4xNzkwNzIgMS43MzA1NzUgMS4xNzkwNzMgMi40MTUxOTcgMy4yNzA5NzU4aC0zLjg3OTUyOXEtLjc2MDY5Mi0xLjQ2NDMzMTgtMi40MzQyMTQtMS40NjQzMzE4LTEuNjczNTIyIDAtMi42NDM0MDUgMS4wNDU5NTEyLS45NTA4NjUgMS4wNDU5NTE1LS45NTA4NjUgMi43OTU1NDMgMCAxLjc0OTU5MTYuOTUwODY1IDIuNzk1NTQzMS45Njk4ODMgMS4wNDU5NTE1IDIuNjQzNDA1IDEuMDQ1OTUxNSAxLjY3MzUyMiAwIDIuNDM0MjE0LTEuNDY0MzMyMWgzLjg3OTUyOXEtLjY4NDYyMiAyLjA5MTkwMjktMi40MTUxOTcgMy4yNzA5NzU1LTEuNzMwNTc0IDEuMTc5MDcyNi0zLjk1NTU5OCAxLjE3OTA3MjYtMi44NzE2MTIgMC00Ljg2ODQyOS0xLjkyMDc0NzN6bTQuNjQwMjIxLTE0LjQ1MzE0NzUgMi45NDc2ODItMS42NTQ1MDV2Mi4yNDQwNDFsLTIuOTQ3NjgyIDEuNTk3NDUzLTIuOTQ3NjgxLTEuNTk3NDUzdi0yLjI0NDA0MXoiLz48cGF0aCBkPSJtODIuNTczMTEzLTEzLjM4ODE3OWgzLjI1MTk1OHYxMy4zODgxNzloLTMuMjUxOTU4bC01LjQzODk0OC04LjQyNDY2Mzd2OC40MjQ2NjM3aC0zLjI1MTk1OHYtMTMuMzg4MTc5aDMuMjUxOTU4bDUuNDM4OTQ4IDguNDI0NjYzOHoiLz48cGF0aCBkPSJtOTYuNjMwNzA1LTEzLjM4ODE3OXYyLjQ3MjI0OWgtNC44MzAzOTR2Mi44NzE2MTIyaDQuMjU5ODc1djIuNDcyMjQ5aC00LjI1OTg3NXYzLjA5OTgxOThoNC44MzAzOTR2Mi40NzIyNDloLTguMDgyMzUydi0xMy4zODgxNzl6bS00LjA2OTcwMi0yLjg3MTYxMiAyLjk0NzY4MS0xLjY1NDUwNXYyLjI0NDA0MWwtMi45NDc2ODEgMS41OTc0NTMtMi45NDc2ODItMS41OTc0NTN2LTIuMjQ0MDQxeiIvPjwvZz48ZyBjbGlwLXBhdGg9InVybCgjYSkiPjxwYXRoIGQ9Im00NzQuMTE3IDExMS4wODV2LTM5LjYwOWguMDE2di0uMDAyaDM5LjYwOXYuMDE0aC4wMDF2OS40NjNoLTUuNDg5di0zLjk4N2gtMjguNjQ3djI4LjYzMmgyOC42MzF2LTMuOTcyaDUuNDg4djkuNDYxeiIgZmlsbD0idXJsKCNiKSIvPjwvZz48ZyBmaWxsPSIjMjcwNTVlIiB0cmFuc2Zvcm09Im1hdHJpeCgxIDAgMCAtLjk4NzUyODg4IDUyMi42MzIxIDcyLjgyNjEpIj48cGF0aCBkPSJtMi40ODAxMzAxLTUuNzI5MTAwNXEuOTY3MjUwNyAwIDEuNDcxNTQzOS40NzEyMjQ3LjUxMjU2MDIuNDcxMjI0Ny41MTI1NjAyIDEuMjA2OTk2NiAwIC43MzU3NzItLjQ5NjAyNiAxLjIxNTI2MzgtLjQ4Nzc1OS40NzEyMjQ3LTEuNDg4MDc4MS40NzEyMjQ3aC0xLjEwNzc5MTR2Mi4zNjQzOTA3aC0uNzUyMzA2MTd2LTUuNzI5MTAwNXptLTEuMTA3NzkxNCAyLjc2OTQ3ODZoMS4xMDc3OTE0cS42MjAwMzI1IDAgLjkxNzY0ODEtLjI4MTA4MTQuMzA1ODgyNy0uMjg5MzQ4NS4zMDU4ODI3LS44MDE5MDg4IDAtMS4wODI5OTAxLTEuMjIzNTMwOC0xLjA4Mjk5MDFoLTEuMTA3NzkxNHoiLz48cGF0aCBkPSJtNi4wOTYxNTk4LTIuMzY0MzkwN3YyLjM2NDM5MDdoLS43NTIzMDYxdi01LjcyOTEwMDVoMS44NjAwOTc2cS45NjcyNTA3IDAgMS40NzE1NDM4LjQ3MTIyNDcuNTEyNTYwMi40NzEyMjQ3LjUxMjU2MDIgMS4xNTczOTQgMCAuNjc3OTAyMy0uMzcyMDE5NSAxLjEzMjU5MjgtLjM3MjAxOTUuNDU0NjkwNS0xLjExNjA1ODUuNTcwNDI5OWwxLjU3OTAxNjEgMi4zOTc0NTkxaC0uOTQyNDQ5NGwtMS41MDQ2MTIzLTIuMzY0MzkwN3ptMC0yLjc2MTIxMTV2Mi4xNjU5ODAzaDEuMTA3NzkxNXEuNjIwMDMyNSAwIC45MTc2NDgxLS4yODEwODE0LjMwNTg4MjctLjI4OTM0ODUuMzA1ODgyNy0uODAxOTA4OCAwLTEuMDgyOTkwMS0xLjIyMzUzMDgtMS4wODI5OTAxeiIvPjxwYXRoIGQ9Im0xNC40NTI1NDQtMS4yMzE3OTc5cS42MDM0OTgtLjYyMDAzMjYuNjAzNDk4LTEuNjM2ODg1OSAwLTEuMDE2ODUzNC0uNjAzNDk4LTEuNjI4NjE4OC0uNjAzNDk4LS42MjAwMzI1LTEuNTQ1OTQ4LS42MjAwMzI1LS45MzQxODIgMC0xLjU0NTk0OC42MjAwMzI1LS42MDM0OTguNjExNzY1NC0uNjAzNDk4IDEuNjI4NjE4OCAwIDEuMDE2ODUzMy42MTE3NjYgMS42MzY4ODU5LjYxMTc2NS42MjAwMzI0OCAxLjU0NTk0Ny42MjAwMzI0OC45MzQxODMgMCAxLjUzNzY4MS0uNjIwMDMyNDh6bS0xLjUzNzY4MSAxLjI4OTY2NzZxLTEuMjMxNzk4IDAtMi4wNzUwNDItLjgyNjcxMDAzLS44NDMyNDQxLS44MzQ5NzcxNy0uODQzMjQ0MS0yLjA5OTg0MzQ3IDAtMS4yNzMxMzM1Ljg0MzI0NDEtMi4wOTE1NzY0Ljg0MzI0NC0uODI2NzEgMi4wNzUwNDItLjgyNjcxIDEuMjMxNzk4IDAgMi4wNjY3NzUuODI2NzEuODQzMjQ1LjgxODQ0MjkuODQzMjQ1IDIuMDkxNTc2NCAwIDEuMjczMTMzNC0uODQzMjQ1IDIuMDk5ODQzNDctLjgzNDk3Ny44MjY3MTAwMy0yLjA2Njc3NS44MjY3MTAwM3oiLz48cGF0aCBkPSJtMjEuNDU0Nzc4LjA0OTYwMjZxLTEuMjMxNzk4IDAtMi4wNzUwNDItLjgyNjcxMDAzLS44NDMyNDQtLjgyNjcxMDA3LS44NDMyNDQtMi4wOTE1NzYzNyAwLTEuMjczMTMzNS44NDMyNDQtMi4wOTE1NzY0Ljg0MzI0NC0uODI2NzEgMi4wNzUwNDItLjgyNjcxLjg5Mjg0NyAwIDEuNTg3Mjg0LjQyMTYyMjEuNzAyNzAzLjQyMTYyMjEgMS4wMzMzODcgMS4yMTUyNjM3aC0uOTA5MzgxcS0uNTEyNTYtLjk2NzI1MDctMS43MTEyOS0uOTY3MjUwNy0uOTM0MTgyIDAtMS41NDU5NDcuNjIwMDMyNS0uNjAzNDk5LjYxMTc2NTQtLjYwMzQ5OSAxLjYyODYxODggMCAxLjAxNjg1MzMuNjAzNDk5IDEuNjM2ODg1OS42MTE3NjUuNjIwMDMyNDggMS41NDU5NDcuNjIwMDMyNDguNTcwNDMgMCAxLjAxNjg1NC0uMjQ4MDEzMDEuNDQ2NDIzLS4yNTYyODAwNy42OTQ0MzYtLjcyNzUwNDg3aC45MDkzODFxLS4zMzA2ODQuNzkzNjQxNjctMS4wMzMzODcgMS4yMTUyNjM3OC0uNjk0NDM3LjQyMTYyMjEyLTEuNTg3Mjg0LjQyMTYyMjEyem0tLjAzMzA3LTYuNzg3Mjg5NCAxLjE0OTEyNy0uNzEwOTcwNnYuNjM2NTY2N2wtMS4xNDkxMjcuNjg2MTY5NC0xLjE0MDg2LS42ODYxNjk0di0uNjM2NTY2N3oiLz48cGF0aCBkPSJtMjguOTM4OTg0IDAtLjQ0NjQyNC0xLjI1NjU5OTNoLTIuNTQ2MjY3bC0uNDQ2NDIzIDEuMjU2NTk5M2gtLjc2ODg0bDIuMDgzMzA5LTUuNzI5MTAwNWguODI2NzFsMi4wNzUwNDIgNS43MjkxMDA1em0tMi43Nzc3NDYtMS44NTE4MzA1aDIuMTE2Mzc4bC0xLjA1ODE4OS0yLjk1OTYyMTl6Ii8+PHBhdGggZD0ibTMxLjI2NDUxOCAwaC0uNzUyMzA2di01LjcyOTEwMDVoLjc1MjMwNnYyLjY1MzczOTJsMi4zNTYxMjQtMi42NTM3MzkyaC45ODM3ODVsLTIuNjc4NTQxIDIuOTAxNzUyMiAyLjY3ODU0MSAyLjgyNzM0ODNoLTEuMDAwMzE5bC0yLjMzOTU5LTIuNTYyODAxMXoiLz48cGF0aCBkPSJtMzkuMjQyMjctMS4yMzE3OTc5cS42MDM0OTktLjYyMDAzMjYuNjAzNDk5LTEuNjM2ODg1OSAwLTEuMDE2ODUzNC0uNjAzNDk5LTEuNjI4NjE4OC0uNjAzNDk4LS42MjAwMzI1LTEuNTQ1OTQ4LS42MjAwMzI1LS45MzQxODIgMC0xLjU0NTk0Ny42MjAwMzI1LS42MDM0OTkuNjExNzY1NC0uNjAzNDk5IDEuNjI4NjE4OCAwIDEuMDE2ODUzMy42MTE3NjYgMS42MzY4ODU5LjYxMTc2NS42MjAwMzI0OCAxLjU0NTk0OC42MjAwMzI0OC45MzQxODIgMCAxLjUzNzY4LS42MjAwMzI0OHptLTEuNTM3NjggMS4yODk2Njc2cS0xLjIzMTc5OCAwLTIuMDc1MDQzLS44MjY3MTAwMy0uODQzMjQ0LS44MzQ5NzcxNy0uODQzMjQ0LTIuMDk5ODQzNDcgMC0xLjI3MzEzMzUuODQzMjQ0LTIuMDkxNTc2NC44NDMyNDUtLjgyNjcxIDIuMDc1MDQzLS44MjY3MSAxLjIzMTc5OCAwIDIuMDY2Nzc1LjgyNjcxLjg0MzI0NC44MTg0NDI5Ljg0MzI0NCAyLjA5MTU3NjQgMCAxLjI3MzEzMzQtLjg0MzI0NCAyLjA5OTg0MzQ3LS44MzQ5NzcuODI2NzEwMDMtMi4wNjY3NzUuODI2NzEwMDN6Ii8+PHBhdGggZD0ibTQzLjE0MDIwOCAwLTIuMjA3MzE2LTUuNzI5MTAwNWguODAxOTA5bDEuODAyMjI4IDQuOTI3MTkxNzcgMS44MTg3NjItNC45MjcxOTE3N2guODAxOTA5bC0yLjIwNzMxNiA1LjcyOTEwMDV6Ii8+PHBhdGggZD0ibTQ2LjkzMDY3NSAwdi01LjcyOTEwMDVoLjc1MjMwNnY1LjcyOTEwMDV6Ii8+PHBhdGggZD0ibTUxLjY2NDQxMy4wNDk2MDI2cS0xLjIzMTc5OCAwLTIuMDc1MDQyLS44MjY3MTAwMy0uODQzMjQ0LS44MjY3MTAwNy0uODQzMjQ0LTIuMDkxNTc2MzcgMC0xLjI3MzEzMzUuODQzMjQ0LTIuMDkxNTc2NC44NDMyNDQtLjgyNjcxIDIuMDc1MDQyLS44MjY3MS44OTI4NDcgMCAxLjU4NzI4My40MjE2MjIxLjcwMjcwNC40MjE2MjIxIDEuMDMzMzg4IDEuMjE1MjYzN2gtLjkwOTM4MXEtLjUxMjU2LS45NjcyNTA3LTEuNzExMjktLjk2NzI1MDctLjkzNDE4MiAwLTEuNTQ1OTQ4LjYyMDAzMjUtLjYwMzQ5OC42MTE3NjU0LS42MDM0OTggMS42Mjg2MTg4IDAgMS4wMTY4NTMzLjYwMzQ5OCAxLjYzNjg4NTkuNjExNzY2LjYyMDAzMjQ4IDEuNTQ1OTQ4LjYyMDAzMjQ4LjU3MDQzIDAgMS4wMTY4NTQtLjI0ODAxMzAxLjQ0NjQyMy0uMjU2MjgwMDcuNjk0NDM2LS43Mjc1MDQ4N2guOTA5MzgxcS0uMzMwNjg0Ljc5MzY0MTY3LTEuMDMzMzg4IDEuMjE1MjYzNzgtLjY5NDQzNi40MjE2MjIxMi0xLjU4NzI4My40MjE2MjIxMnoiLz48cGF0aCBkPSJtNTguNDQwMTMtNS43MjkxMDA1di41OTUyMzEyaC0yLjI4MTcydjEuOTUxMDM1N2gyLjAzMzcwN3YuNTg2OTY0MWgtMi4wMzM3MDd2Mi4wMDA2MzgyOGgyLjI4MTcydi41OTUyMzEyMmgtMy4wMzQwMjZ2LTUuNzI5MTAwNXoiLz48L2c+PC9nPjwvc3ZnPgo=" alt="Společně pro Čakovice"></a>
+  <ul class="nav-links">
+    <li><a href="#program">Program</a></li>
+    <li><a href="#akce">Akce</a></li>
+    <li><a href="#kandidati">Kandidáti</a></li>
+    <li><a href="#vysledky">Výsledky</a></li>
+    <li><a href="#kontakt" class="nav-cta">Kontakt</a></li>
+  </ul>
+</nav>
+
+<section style="background:var(--white);padding-top:78px">
+  <div id="hero">
+    <div>
+      <div class="hero-eyebrow"><div class="hero-eyebrow-dot"></div>Komunální volby 2026 · Praha – Čakovice</div>
+      <h1>Čakovice,<br><em>na kterých záleží.</em></h1>
+      <p class="hero-perex">Koalice ODS a TOP09 přináší odpovědnou správu, konkrétní výsledky a jasnou vizi pro naši čtvrť. Děláme politiku blízko lidem.</p>
+      <div class="hero-actions">
+        <a href="#program" class="btn-primary">Náš program →</a>
+        <a href="#kandidati" class="btn-secondary">Kandidáti</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card-stack">
+        <div class="hcard hcard-main">
+          <h3>Společně pro Čakovice</h3>
+          <p>Odpovědná správa s jasnou vizí pro každodenní život ve čtvrti.</p>
+          <div style="margin-top:20px;display:flex;gap:8px">
+            <span style="background:rgba(255,255,255,.15);border-radius:100px;padding:4px 12px;font-size:11px;font-weight:600">ODS</span>
+            <span style="background:rgba(255,255,255,.15);border-radius:100px;padding:4px 12px;font-size:11px;font-weight:600">TOP09</span>
+          </div>
+        </div>
+        <div class="hcard hcard-stat">
+          <span class="hcard-stat-num">4+</span>
+          <span class="hcard-stat-label">Roky ve vedení MČ</span>
+        </div>
+        <div class="hcard hcard-badge">
+          <span class="hcard-badge-icon">🏆</span>
+          <div><span class="hcard-badge-text">12+ projektů</span><span class="hcard-badge-sub">Dokončeno pro Čakovice</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats-strip"><div class="stats-strip-inner"><div class="stat-cell reveal"><span class="stat-cell-num">4+</span><span class="stat-cell-label">Roky ve vedení MČ</span></div><div class="stat-cell reveal"><span class="stat-cell-num">18</span><span class="stat-cell-label">Kandidátů na listině</span></div><div class="stat-cell reveal"><span class="stat-cell-num">12+</span><span class="stat-cell-label">Dokončených projektů</span></div><div class="stat-cell reveal"><span class="stat-cell-num">#1</span><span class="stat-cell-label">Lídr: Ing. Jiří Vintiška</span></div></div></div>
+
+<section id="program" class="section">
+  <div class="section-inner">
+    <span class="section-tag reveal">Program</span>
+    <h2 class="reveal">Co prosazujeme</h2>
+    <p class="section-sub reveal">Naše priority vycházejí z každodenní reality Čakovic. Žádné sliby — jen konkrétní cíle, které umíme splnit.</p>
+    <div class="program-grid">
+    <div class="prog-card reveal" onclick="openModal('p_Rozvoj_infrastruktury')" style="cursor:pointer">
+      <div class="prog-icon">🏗️</div>
+      <h3>Rozvoj infrastruktury</h3>
+      <p>Opravy chodníků, modernizace dopravního napojení a zajištění kvalitní technické infrastruktury.</p>
+      <span class="detail-hint">Číst více →</span>
+    </div>
+    <div class="prog-card reveal" onclick="openModal('p_Ve_ejn__prostory_a_zele_')" style="cursor:pointer">
+      <div class="prog-icon">🌳</div>
+      <h3>Veřejné prostory a zeleň</h3>
+      <p>Revitalizace parků, dětských hřišť a veřejných prostranství.</p>
+      <span class="detail-hint">Číst více →</span>
+    </div>
+    <div class="prog-card reveal" onclick="openModal('p_Dostupn__bydlen_')" style="cursor:pointer">
+      <div class="prog-icon">🏠</div>
+      <h3>Dostupné bydlení</h3>
+      <p>Aktivní bytová politika a transparentní správa obecního fondu.</p>
+      <span class="detail-hint">Číst více →</span>
+    </div>
+    <div class="prog-card reveal" onclick="openModal('p__kolstv__a_rodiny')" style="cursor:pointer">
+      <div class="prog-icon">🎓</div>
+      <h3>Školství a rodiny</h3>
+      <p>Investice do škol, dostatečná kapacita MŠ a ZŠ.</p>
+      <span class="detail-hint">Číst více →</span>
+    </div>
+    <div class="prog-card reveal" onclick="openModal('p_Bezpe_nost_a_po__dek')" style="cursor:pointer">
+      <div class="prog-icon">🔒</div>
+      <h3>Bezpečnost a pořádek</h3>
+      <p>Spolupráce s Městskou policií a kamerový systém.</p>
+      <span class="detail-hint">Číst více →</span>
+    </div>
+    <div class="prog-card reveal" onclick="openModal('p_Transparentn__radnice')" style="cursor:pointer">
+      <div class="prog-icon">💡</div>
+      <h3>Transparentní radnice</h3>
+      <p>Otevřené zakázky a přístupná samospráva.</p>
+      <span class="detail-hint">Číst více →</span>
+    </div></div>
+  </div>
+</section>
+
+<section id="kandidati" class="section">
+  <div class="section-inner">
+    <span class="section-tag reveal">Kandidáti</span>
+    <h2 class="reveal">Lidé, na které se můžete spolehnout</h2>
+    <p class="section-sub reveal">Naše kandidátka spojuje zkušené komunální politiky s odborníky z praxe.</p>
+    <div class="kandidati-grid">
+    <div class="kand-card reveal" onclick="openModal('k_Ing__Ji___Vinti_ka')" style="cursor:pointer">
+      <div class="kand-photo"><span style="font-family:'Lora',serif;font-size:32px;font-weight:700;color:#1A3FAA">IJ</span></div>
+      <div class="kand-body">
+        <div class="kand-rank">č. 1</div>
+        <h3>Ing. Jiří Vintiška</h3>
+        <p>Starosta MČ Praha–Čakovice, odborník na komunální správu.</p>
+        <span class="kand-party party-ods">ODS</span>
+        <div class="detail-hint">Zobrazit detail →</div>
+      </div>
+    </div>
+    <div class="kand-card reveal" onclick="openModal('k_Kandid_t____2')" style="cursor:pointer">
+      <div class="kand-photo"><span style="font-family:'Lora',serif;font-size:32px;font-weight:700;color:#1A3FAA">Kč</span></div>
+      <div class="kand-body">
+        <div class="kand-rank">č. 2</div>
+        <h3>Kandidát č. 2</h3>
+        <p>Doplňte krátký popis.</p>
+        <span class="kand-party party-top09">TOP09</span>
+        <div class="detail-hint">Zobrazit detail →</div>
+      </div>
+    </div>
+    <div class="kand-card reveal" onclick="openModal('k_Kandid_t____3')" style="cursor:pointer">
+      <div class="kand-photo"><span style="font-family:'Lora',serif;font-size:32px;font-weight:700;color:#1A3FAA">Kč</span></div>
+      <div class="kand-body">
+        <div class="kand-rank">č. 3</div>
+        <h3>Kandidát č. 3</h3>
+        <p>Doplňte krátký popis.</p>
+        <span class="kand-party party-ods">ODS</span>
+        <div class="detail-hint">Zobrazit detail →</div>
+      </div>
+    </div>
+    <div class="kand-card reveal" onclick="openModal('k_Kandid_t____4')" style="cursor:pointer">
+      <div class="kand-photo"><span style="font-family:'Lora',serif;font-size:32px;font-weight:700;color:#1A3FAA">Kč</span></div>
+      <div class="kand-body">
+        <div class="kand-rank">č. 4</div>
+        <h3>Kandidát č. 4</h3>
+        <p>Doplňte krátký popis.</p>
+        <span class="kand-party party-top09">TOP09</span>
+        <div class="detail-hint">Zobrazit detail →</div>
+      </div>
+    </div></div>
+    
+  </div>
+</section>
+
+<section id="vysledky" class="section">
+  <div class="section-inner">
+    <span class="section-tag reveal">Konkrétní výsledky</span>
+    <h2 class="reveal">Co jsme již dokázali</h2>
+    <p class="section-sub reveal">Slova nestačí — proto ukazujeme, co jsme pro Čakovice skutečně udělali.</p>
+    <div class="vysledky-grid">
+      <div class="vysledky-list">
+    <div class="vys-item reveal" onclick="openModal('v_Rekonstrukce_chodn_k__v_centru')" style="cursor:pointer">
+      <div class="vys-check">✓</div>
+      <div class="vys-text">
+        <h4>Rekonstrukce chodníků v centru</h4>
+        <p>Kompletní obnova pěší zóny, celkem 1,2 km nového povrchu.</p>
+        <span class="detail-hint" style="font-size:12px;color:var(--blue);margin-top:4px;display:inline-block">Číst více →</span>
+      </div>
+    </div>
+    <div class="vys-item reveal" onclick="openModal('v_Nov__h_i_t__v_Parku__akovice')" style="cursor:pointer">
+      <div class="vys-check">✓</div>
+      <div class="vys-text">
+        <h4>Nové hřiště v Parku Čakovice</h4>
+        <p>Moderní hřiště s dopadovými plochami pro děti od 2 do 15 let.</p>
+        <span class="detail-hint" style="font-size:12px;color:var(--blue);margin-top:4px;display:inline-block">Číst více →</span>
+      </div>
+    </div>
+    <div class="vys-item reveal" onclick="openModal('v_Roz___en__kapacity_M_')" style="cursor:pointer">
+      <div class="vys-check">✓</div>
+      <div class="vys-text">
+        <h4>Rozšíření kapacity MŠ</h4>
+        <p>24 nových míst v mateřské škole.</p>
+        <span class="detail-hint" style="font-size:12px;color:var(--blue);margin-top:4px;display:inline-block">Číst více →</span>
+      </div>
+    </div>
+    <div class="vys-item reveal" onclick="openModal('v_Transparentn__ve_ejn__zak_zky')" style="cursor:pointer">
+      <div class="vys-check">✓</div>
+      <div class="vys-text">
+        <h4>Transparentní veřejné zakázky</h4>
+        <p>Všechny zakázky nad 100 tis. Kč zveřejňovány.</p>
+        <span class="detail-hint" style="font-size:12px;color:var(--blue);margin-top:4px;display:inline-block">Číst více →</span>
+      </div>
+    </div>
+    <div class="vys-item reveal" onclick="openModal('v_Kamerov__syst_m')" style="cursor:pointer">
+      <div class="vys-check">✓</div>
+      <div class="vys-text">
+        <h4>Kamerový systém</h4>
+        <p>Instalace 8 nových kamer v rizikových lokalitách.</p>
+        <span class="detail-hint" style="font-size:12px;color:var(--blue);margin-top:4px;display:inline-block">Číst více →</span>
+      </div>
+    </div></div>
+      <div class="vysledky-panel reveal">
+        <h3>Spokojení obyvatelé</h3>
+        <p>Hodnocení z průzkumu MČ Praha–Čakovice, jaro 2025.</p>
+        <div class="pb-item"><div class="pb-top"><span>Celková spokojenost</span><span>82 %</span></div><div class="pb-track"><div class="pb-fill" style="width:82%"></div></div></div>
+        <div class="pb-item"><div class="pb-top"><span>Stav veřejných prostranství</span><span>76 %</span></div><div class="pb-track"><div class="pb-fill" style="width:76%"></div></div></div>
+        <div class="pb-item"><div class="pb-top"><span>Práce úřadu MČ</span><span>79 %</span></div><div class="pb-track"><div class="pb-fill" style="width:79%"></div></div></div>
+        <div class="pb-item"><div class="pb-top"><span>Bezpečnost ve čtvrti</span><span>71 %</span></div><div class="pb-track"><div class="pb-fill" style="width:71%"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="akce" class="section">
+  <div class="section-inner">
+    <span class="section-tag reveal">Akce &amp; události</span>
+    <h2 class="reveal">Přijďte se potkat</h2>
+    <p class="section-sub reveal">Setkáme se s vámi osobně. Přijďte, zeptejte se, pohovořte s kandidáty.</p>
+    <div class="akce-grid">
+        <div class="akce-card reveal">
+          <div class="akce-top">
+            <div class="akce-date"><span class="akce-day">15</span><span class="akce-month">srp</span></div>
+            <div><span class="akce-typ-badge">🤝 Setkání s občany</span><div class="akce-time">10:00 hod.</div></div>
+          </div>
+          <div class="akce-body">
+            <h3>Setkání s občany — Čakovické náměstí</h3>
+            <p>Přijďte se seznámit s naším programem a kandidáty. Volná diskuse, občerstvení zajištěno.</p>
+            <div class="akce-misto">📍 Náměstí Čakovice</div>
+          </div>
+        </div>
+        <div class="akce-card reveal">
+          <div class="akce-top">
+            <div class="akce-date"><span class="akce-day">5</span><span class="akce-month">zář</span></div>
+            <div><span class="akce-typ-badge">🎤 Mítink</span><div class="akce-time">17:00 hod.</div></div>
+          </div>
+          <div class="akce-body">
+            <h3>Předvolební mítink</h3>
+            <p>Závěrečné předvolební setkání. Představení celé kandidátky ODS + TOP09.</p>
+            <div class="akce-misto">📍 Kulturní dům Čakovice</div>
+          </div>
+        </div></div>
+  </div>
+</section>
+
+<section id="kontakt" class="section">
+  <div class="section-inner">
+    <div class="kontakt-grid">
+      <div>
+        <span class="section-tag reveal">Kontakt</span>
+        <h2 class="reveal">Napište nám</h2>
+        <p class="section-sub reveal" style="margin-bottom:0">Máte otázku, nápad nebo chcete vědět více? Jsme tu pro vás. Každý podnět od obyvatel Čakovic bereme vážně.</p>
+        <div class="kontakt-links">
+          <a href="/cdn-cgi/l/email-protection#670e090108271417080b0204090217150804060c08110e040249041d" class="kontakt-link reveal"><div class="kontakt-link-icon">✉</div><span class="__cf_email__" data-cfemail="a3cacdc5cce3d0d3cccfc6c0cdc6d3d1ccc0c2c8ccd5cac0c68dc0d9">[email&#160;protected]</span></a>
+          <a href="https://www.facebook.com/spolecneprocakovice" class="kontakt-link reveal"><div class="kontakt-link-icon">f</div>Facebook: Společně pro Čakovice</a>
+          <a href="#" class="kontakt-link reveal"><div class="kontakt-link-icon">📍</div>Úřad MČ Praha–Čakovice, Kojetická 15</a>
+        </div>
+      </div>
+      <div class="kontakt-form reveal">
+        <h3>Pošlete zprávu</h3>
+        <div class="kfg"><label>Jméno</label><input type="text" placeholder="Vaše jméno"></div>
+        <div class="kfg"><label>E-mail</label><input type="email" placeholder="vas@email.cz"></div>
+        <div class="kfg"><label>Zpráva</label><textarea placeholder="Váš dotaz nebo podnět..."></textarea></div>
+        <button class="btn-form">Odeslat zprávu →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div><strong>Společně pro Čakovice</strong> · Koalice pro komunální volby 2026 · Praha–Čakovice</div>
+  <div class="footer-parties"><span class="footer-party">ODS</span><span class="footer-party">TOP09</span></div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const MODALS = {
+  "k_Ing__Ji___Vinti_ka": `<div class="modal-kand">
+      <div class="modal-kand-top">
+        <div class="modal-kand-photo"><span style="font-family:'Lora',serif;font-size:32px;font-weight:700;color:#1A3FAA">IJ</span></div>
+        <div>
+          <div class="kand-rank" style="margin-bottom:6px">Kandidát č. 1 · ODS</div>
+          <h2 style="font-size:26px;margin-bottom:8px">Ing. Jiří Vintiška</h2>
+          <span class="kand-party party-ods">ODS</span>
+          <div style="margin-top:12px;font-size:13px;color:var(--text-dim)">✉ <a href="mailto:jiri.vintiska@cakovice.cz" style="color:var(--blue)">jiri.vintiska@cakovice.cz</a></div>
+        </div>
+      </div>
+      <div class="modal-body-text">Jiří Vintiška působí jako starosta MČ Praha–Čakovice od roku 2022. Vystudoval stavební inženýrství na ČVUT. Má dlouholeté zkušenosti s řízením veřejné správy a rozvojem území. Ve svém mandátu se zaměřuje na transparentnost, rozvoj infrastruktury a kvalitu života obyvatel.</div>
+    </div>`,
+  "k_Kandid_t____2": `<div class="modal-kand">
+      <div class="modal-kand-top">
+        <div class="modal-kand-photo"><span style="font-family:'Lora',serif;font-size:32px;font-weight:700;color:#1A3FAA">Kč</span></div>
+        <div>
+          <div class="kand-rank" style="margin-bottom:6px">Kandidát č. 2 · TOP09</div>
+          <h2 style="font-size:26px;margin-bottom:8px">Kandidát č. 2</h2>
+          <span class="kand-party party-top09">TOP09</span>
+          
+        </div>
+      </div>
+      <div class="modal-body-text">Doplňte podrobný životopis a politické priority kandidáta.</div>
+    </div>`,
+  "k_Kandid_t____3": `<div class="modal-kand">
+      <div class="modal-kand-top">
+        <div class="modal-kand-photo"><span style="font-family:'Lora',serif;font-size:32px;font-weight:700;color:#1A3FAA">Kč</span></div>
+        <div>
+          <div class="kand-rank" style="margin-bottom:6px">Kandidát č. 3 · ODS</div>
+          <h2 style="font-size:26px;margin-bottom:8px">Kandidát č. 3</h2>
+          <span class="kand-party party-ods">ODS</span>
+          
+        </div>
+      </div>
+      <div class="modal-body-text">Doplňte podrobný životopis a politické priority kandidáta.</div>
+    </div>`,
+  "k_Kandid_t____4": `<div class="modal-kand">
+      <div class="modal-kand-top">
+        <div class="modal-kand-photo"><span style="font-family:'Lora',serif;font-size:32px;font-weight:700;color:#1A3FAA">Kč</span></div>
+        <div>
+          <div class="kand-rank" style="margin-bottom:6px">Kandidát č. 4 · TOP09</div>
+          <h2 style="font-size:26px;margin-bottom:8px">Kandidát č. 4</h2>
+          <span class="kand-party party-top09">TOP09</span>
+          
+        </div>
+      </div>
+      <div class="modal-body-text">Doplňte podrobný životopis a politické priority kandidáta.</div>
+    </div>`,
+  "v_Rekonstrukce_chodn_k__v_centru": `<div>
+      
+      <h2 style="font-size:22px;margin-bottom:16px">Rekonstrukce chodníků v centru</h2>
+      <div class="modal-body-text">Rekonstrukce proběhla v letech 2023–2024 v okolí úřadu MČ a základní školy. Celkové náklady činily 4,2 mil. Kč, z toho 2,1 mil. Kč bylo pokryto dotací z MHMP.</div>
+    </div>`,
+  "v_Nov__h_i_t__v_Parku__akovice": `<div>
+      
+      <h2 style="font-size:22px;margin-bottom:16px">Nové hřiště v Parku Čakovice</h2>
+      <div class="modal-body-text">Hřiště bylo otevřeno v červnu 2024. Obsahuje průlezky, houpačky, pískoviště a sportovní prvky pro starší děti. Náklady 1,8 mil. Kč.</div>
+    </div>`,
+  "v_Roz___en__kapacity_M_": `<div>
+      
+      <h2 style="font-size:22px;margin-bottom:16px">Rozšíření kapacity MŠ</h2>
+      <div class="modal-body-text">Díky rekonstrukci prostor v MŠ Čakovická se podařilo otevřít novou třídu. Od září 2024 mají místo v MŠ všechny přihlášené děti.</div>
+    </div>`,
+  "v_Transparentn__ve_ejn__zak_zky": `<div>
+      
+      <h2 style="font-size:22px;margin-bottom:16px">Transparentní veřejné zakázky</h2>
+      <div class="modal-body-text">Od roku 2023 zveřejňujeme všechny smlouvy nad 100 000 Kč v registru smluv a na webu MČ ještě před jejich podpisem.</div>
+    </div>`,
+  "v_Kamerov__syst_m": `<div>
+      
+      <h2 style="font-size:22px;margin-bottom:16px">Kamerový systém</h2>
+      <div class="modal-body-text">V roce 2024 bylo instalováno 8 nových kamer HD rozlišení. Systém je napojen na dispečink Městské policie. Došlo k poklesu vandalismu o 40 %.</div>
+    </div>`,
+  "p_Rozvoj_infrastruktury": `<div>
+      <div style="font-size:36px;margin-bottom:16px">🏗️</div>
+      <h2 style="font-size:24px;margin-bottom:16px">Rozvoj infrastruktury</h2>
+      <div class="modal-body-text">Plánujeme komplexní rekonstrukci chodníků v celém obvodu, modernizaci křižovatek a zlepšení propojení s MHD. Součástí je také budování cyklostezek a zklidnění dopravy v obytných zónách.</div>
+    </div>`,
+  "p_Ve_ejn__prostory_a_zele_": `<div>
+      <div style="font-size:36px;margin-bottom:16px">🌳</div>
+      <h2 style="font-size:24px;margin-bottom:16px">Veřejné prostory a zeleň</h2>
+      <div class="modal-body-text">Chceme revitalizovat všechny hlavní parky, přidat nová hřiště a odpočinkové plochy. Plánujeme výsadbu stromů podél hlavních ulic a vytvoření komunitních zahrad.</div>
+    </div>`,
+  "p_Dostupn__bydlen_": `<div>
+      <div style="font-size:36px;margin-bottom:16px">🏠</div>
+      <h2 style="font-size:24px;margin-bottom:16px">Dostupné bydlení</h2>
+      <div class="modal-body-text">Budeme aktivně spravovat obecní bytový fond, podporovat výstavbu dostupných bytů a chránit nájemníky. Každá zakázka bude transparentně vysoutěžena.</div>
+    </div>`,
+  "p__kolstv__a_rodiny": `<div>
+      <div style="font-size:36px;margin-bottom:16px">🎓</div>
+      <h2 style="font-size:24px;margin-bottom:16px">Školství a rodiny</h2>
+      <div class="modal-body-text">Garantujeme místo v MŠ pro každé dítě z Čakovic. Investujeme do oprav budov, moderního vybavení tříd a podpory volnočasových aktivit.</div>
+    </div>`,
+  "p_Bezpe_nost_a_po__dek": `<div>
+      <div style="font-size:36px;margin-bottom:16px">🔒</div>
+      <h2 style="font-size:24px;margin-bottom:16px">Bezpečnost a pořádek</h2>
+      <div class="modal-body-text">Rozšíříme kamerový systém do všech rizikových lokalit, posílíme hlídkování Městské policie. Otevřeme přímou linku pro nahlášení problémů.</div>
+    </div>`,
+  "p_Transparentn__radnice": `<div>
+      <div style="font-size:36px;margin-bottom:16px">💡</div>
+      <h2 style="font-size:24px;margin-bottom:16px">Transparentní radnice</h2>
+      <div class="modal-body-text">Všechny zakázky nad 50 000 Kč budou zveřejňovány před podpisem. Zavedeme online přenosy ze zastupitelstva a rozklikávací rozpočet na webu MČ.</div>
+    </div>`,
+};
+
+function openModal(id) {
+  const html = MODALS[id];
+  if(!html) return;
+  document.getElementById('modal-content').innerHTML = html;
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeModalBg(e) {
+  if(e.target === document.getElementById('modal-overlay')) closeModal();
+}
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+
+function toggleAll(btn) {
+  const el = document.getElementById('all-kandidati');
+  const open = el.style.display === 'block';
+  el.style.display = open ? 'none' : 'block';
+  btn.textContent = open ? 'Zobrazit všechny kandidáty ↓' : 'Skrýt ↑';
+  if(!open) el.querySelectorAll('.reveal').forEach(r => setTimeout(()=>r.classList.add('visible'),50));
+}
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      const idx = Array.from(e.target.parentElement.children).indexOf(e.target) % 5;
+      setTimeout(() => e.target.classList.add('visible'), idx * 70);
+      obs.unobserve(e.target);
+    }
+  });
+}, {threshold:.0
